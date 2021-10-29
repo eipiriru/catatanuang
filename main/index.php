@@ -1,5 +1,14 @@
 <?php
     include $_SERVER['DOCUMENT_ROOT'].'/catatanuang/main/awal.php'; 
+	$user = $_SESSION['username'];
+    $id_us = $_SESSION['id_us'];
+    $nama = $_SESSION['nama'];
+    $email = $_SESSION['email'];
+    if ($id_us == 0){
+		mysqli_query($con, "INSERT INTO user (username, password, nama_lengkap, email) VALUES ('$user', ' ', '$nama', '$email')");
+		$id = mysqli_insert_id($con);
+		$_SESSION['id_us'] = $id;
+    }
 	$pemasukan = total_pemasukan($con);
 	$pengeluaran = total_pengeluaran($con);
 	$saldo = $pemasukan - $pengeluaran;
